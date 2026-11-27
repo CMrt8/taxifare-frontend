@@ -11,3 +11,7 @@ wheels/
 
 # Environment
 .env
+.streamlit
+
+# VS Code
+.vscode

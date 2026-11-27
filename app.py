@@ -28,12 +28,17 @@ pickup_latitude, pickup_longitude, dropoff_latitude, dropoff_longitude = (
 
 st.set_page_config(page_title="Taxi Fare Predictor", page_icon="🚕", layout="centered")
 st.title("🚕 Taxi Fare Predictor")
-pickup_datetime = st.datetime_input("Pickup datetime", value="2013-07-06 17:18:00")
-passenger_count = st.slider("Passenger count", value=1, min_value=1, max_value=6)
 
 left_col, right_col = st.columns(2)
-
 with left_col:
+    pickup_datetime = st.datetime_input("Pickup datetime", value="2013-07-06 17:18:00")
+
+with right_col:
+    passenger_count = st.slider("Passenger count", value=1, min_value=1, max_value=6)
+
+left_col_map, right_col_map = st.columns(2)
+
+with left_col_map:
     with st.container(horizontal_alignment="center"):
         map_data_pickup = None
         st.title("Pickup location", text_alignment="right")
@@ -52,7 +57,7 @@ with left_col:
                 f"Selected: lat = {pickup_latitude:.6f}, lon = {pickup_longitude:.6f}"
             )
 
-with right_col:
+with right_col_map:
     with st.container(horizontal_alignment="center"):
         st.title("Dropoff location")
 
@@ -70,7 +75,7 @@ with right_col:
             )
 
 if pickup_latitude and dropoff_latitude:
-    url = f"{os.environ["HOSTNAME"]}/predict"
+    url = f"{st.secrets["API_URL"]}/predict"
 
     params = {
         "pickup_datetime": pickup_datetime,
