@@ -70,7 +70,7 @@ with right_col:
             )
 
 if pickup_latitude and dropoff_latitude:
-    url = f"{os.environ["HOSTNAME"]}/predict"
+    url = f"{st.secrets["API_URL"]}/predict"
 
     params = {
         "pickup_datetime": pickup_datetime,
